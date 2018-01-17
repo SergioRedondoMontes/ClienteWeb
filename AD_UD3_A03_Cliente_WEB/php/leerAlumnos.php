@@ -11,7 +11,7 @@ $arrMensaje = array();  // Este array es el codificaremos como JSON tanto si hay
 
 
 
-$query = "SELECT alumnos.cod, dni,alumnos.nombre, apellido,telefono,nacionalidad,titulaciones.nombre as tituNOmbre 
+$query = "SELECT alumnos.cod, dni,alumnos.nombre, apellido,telefono,nacionalidad,titulaciones.nombre as tituNOmbre, titulaciones.cod as tituCod
 FROM alumnos
 JOIN titulaciones ON titulaciones.cod=alumnos.titulacion";
 
@@ -34,7 +34,8 @@ if (isset ( $result ) && $result) { // Si pasa por este if, la query está está
             $arrAlumno["apellido"] = $row["apellido"];
             $arrAlumno["telefono"] = $row["telefono"];
             $arrAlumno["nacionalidad"] = $row["nacionalidad"];
-            $arrAlumno["titulacion"] = $row["tituNOmbre"];
+			$arrAlumno["titulacion"] = $row["tituNOmbre"];
+			$arrAlumno["tituCod"] = $row["tituCod"];
 			// Por último, añadimos el nuevo Alumnos al array de Alumnos
 			$arrAlumnos[] = $arrAlumno;
 			

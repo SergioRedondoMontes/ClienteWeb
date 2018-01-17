@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/tableStyle.css">
-    <script src="borrarAlumno.js"></script>
-    <title>borrarAlumno</title>
+    <script src="actualizarAlumno.js"></script>
+    
+    <title>actualizar alumno</title>
 </head>
-<body onload="loadDoc()">
+<body onload="loadDoc(),loadDocTitulaciones()">
     <div class="datagrid">
         <table id="table" >
             <tr id="headTable">
@@ -18,9 +19,20 @@
                 <th>TELEFONO</th>
                 <th>NACIONALIDAD</th>
                 <th>TITULACION</th>
-                <th>BORRAR</th>
-            </tr>
-        </table>        
+                <th>SELECTOR</th>
+              </tr>
+        </table>
+    </div>
+    <div>
+        <form id="FormUpd">
+                <input type="text" id="dni" placeholder="dni"/>
+                <input type="text" id="nombre" placeholder="nombre"/>
+                <input type="text" id="apellido" placeholder="apellido"/>
+                <input type="text" id="nacionalidad" placeholder="nacionalidad"/>
+                <input type="text" id="telefono" placeholder="telefono"/>
+                
+            <button type="button"onclick="recogerAlumno()" id="button" title="enviar">Actualizar Alumno</button><br/>
+        </form>
     </div>
     <div>
         <form id="formBack">

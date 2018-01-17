@@ -27,7 +27,7 @@ function myFunction(arr) {
 
         //DNI
         var td = document.createElement("td");
-        td.setAttribute("id",dni);
+        //td.setAttribute("id",dni);
         tr.appendChild(td);
         var dni = document.createTextNode(arr[i].dni);
         td.appendChild(dni);

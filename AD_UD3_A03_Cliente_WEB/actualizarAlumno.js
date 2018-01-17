@@ -1,4 +1,5 @@
 var myArr;
+var myArrTitu;
 console.log("INICIO CARGA");
 
 function loadDoc() {
@@ -59,6 +60,7 @@ function myFunction(arr) {
 
         //TITULACION
         var td = document.createElement("td");
+        td.setAttribute("id","titu"+arr[i].tituCod);
         tr.appendChild(td);
         var titulacion = document.createTextNode(arr[i].titulacion);
         td.appendChild(titulacion);
@@ -67,20 +69,62 @@ function myFunction(arr) {
         var td = document.createElement("td");
         tr.appendChild(td);
         var form = document.createElement("form");
-        form.setAttribute("id","myForm");
+        form.setAttribute("id","form"+arr[i].dni);
         td.appendChild(form);
         var btnBorrar = document.createElement("button");
         btnBorrar.setAttribute("type","button");
-        btnBorrar.setAttribute("onclick","borrarAlumno("+arr[i].dni+")");
-        btnBorrar.setAttribute("id","btnBorrar");
+        btnBorrar.setAttribute("onclick","selector("+arr[i].dni+")");
+        btnBorrar.setAttribute("id","btnSeleccionar");
         btnBorrar.setAttribute("title","enviar");
         form.appendChild(btnBorrar);
-        var txtBorrar = document.createTextNode("Eliminar");
+        var txtBorrar = document.createTextNode("Seleccionar");
         btnBorrar.appendChild(txtBorrar);
     }
 }
 
+function loadDocTitulaciones() {
+    var xhttp = new XMLHttpRequest();
+    var url = "php/leerTitulaciones.php";
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // alert(this.responseText);
+            myArrTitu = JSON.parse(this.responseText);
+            myFunctionTitu(myArrTitu.Titulaciones);
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
 
+function myFunctionTitu(arr) {
+    var form = document.getElementById("FormUpd");
+    var button = document.getElementById("button");
+    var selectTitu = document.createElement("select");
+    selectTitu.setAttribute("id","titulacion");
+    //form.appendChild(selectTitu);
+    form.insertBefore(selectTitu,button);
+
+
+    for (let i = 0; i < arr.length; i++) {
+        var optionTitulo = document.createElement("option");
+        optionTitulo.setAttribute("value", arr[i].cod);
+        var texto = document.createTextNode(arr[i].nombre);
+		selectTitu.appendChild(optionTitulo);
+        optionTitulo.appendChild(texto);
+    }
+}
+
+
+function selector(idTrSeleccionado) {
+    var dni;
+    var nombre;
+    var apellido;
+    var nacionalidad;
+    var telefono;
+    var titulacion;
+}
+
+/*
 function borrarAlumno(alumnoID) {
     var resp;
     alert(alumnoID);
@@ -111,3 +155,4 @@ function borrarFila(alumnoID) {
 //alert(alumnoID);
     document.getElementById(alumnoID).remove();
 }
+*/
