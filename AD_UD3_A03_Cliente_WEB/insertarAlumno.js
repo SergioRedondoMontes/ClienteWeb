@@ -53,7 +53,14 @@ function insertAlumno(alumnoJSON) {
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 	xmlhttp.open("POST", url);
-	xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            //alert(xmlhttp.responseText);
+        }
+    };
+
     xmlhttp.send(alumnoJSON);
-    alert(xmlhttp.responseText);
+    
 }

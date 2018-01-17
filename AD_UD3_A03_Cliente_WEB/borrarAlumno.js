@@ -23,9 +23,8 @@ function myFunction(arr) {
 
     for (i = 0; i < arr.length; i++) {
         var tr = document.createElement("tr");
+        tr.setAttribute("id",arr[i].dni);
         table.appendChild(tr);
-        var trNode = document.createTextNode(arr[i].dni);
-        tr.setAttribute("id",trNode);
 
         //DNI
         var td = document.createElement("td");
@@ -83,6 +82,7 @@ function myFunction(arr) {
 
 
 function borrarAlumno(alumnoID) {
+    var resp;
     alert(alumnoID);
     var alumno = JSON.stringify({"alumnoDel":{"dni":alumnoID,},"peticion":"del"});
     alert(alumno);
@@ -90,12 +90,24 @@ function borrarAlumno(alumnoID) {
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 	xmlhttp.open("POST", url);
-	xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            //alert(xmlhttp.responseText);
+            resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
+            //myFunction(myArr.Titulaciones);
+            //alert(resp);
+            if(resp=="ok"){
+               borrarFila(alumnoID);
+            }
+        }
+    };
     xmlhttp.send(alumno);
-    alert(xmlhttp.responseText);
-    //borrarFila(alumnoID);
+
+    
 }
 
 function borrarFila(alumnoID) {
-    
+//alert(alumnoID);
+    document.getElementById(alumnoID).remove();
 }
