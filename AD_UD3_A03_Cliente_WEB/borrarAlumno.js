@@ -84,13 +84,18 @@ function myFunction(arr) {
 
 function borrarAlumno(alumnoID) {
     alert(alumnoID);
-    var alumno = JSON.stringify({"alumnoDel":{"dni":alumnoID,}});
+    var alumno = JSON.stringify({"alumnoDel":{"dni":alumnoID,},"peticion":"del"});
     alert(alumno);
     var url = "php/borrarAlumno.php";
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	xmlhttp.open("GET", url);
+	xmlhttp.open("POST", url);
 	xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(alumno);
     alert(xmlhttp.responseText);
+    //borrarFila(alumnoID);
+}
+
+function borrarFila(alumnoID) {
+    
 }

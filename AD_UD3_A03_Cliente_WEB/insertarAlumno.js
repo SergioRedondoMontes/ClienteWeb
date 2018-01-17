@@ -42,8 +42,8 @@ function recogerAlumno() {
     var titulacion = document.getElementById("titulacion").value;
 
     var alumno = JSON.stringify({"alumnoAdd":{"nombre": nombre, "apellido":apellido,"dni":dni,
-        "nacionalidad":nacionalidad,"telefono":telefono,"titulacion":titulacion}});
-    insertAlumno(alumno);
+        "nacionalidad":nacionalidad,"telefono":telefono,"titulacion":titulacion},"peticion":"add"});
+        insertAlumno(alumno);
 }
 
 function insertAlumno(alumnoJSON) {
@@ -52,7 +52,7 @@ function insertAlumno(alumnoJSON) {
     var url = "php/escribirAlumno.php";
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	xmlhttp.open("GET", url);
+	xmlhttp.open("POST", url);
 	xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(alumnoJSON);
     alert(xmlhttp.responseText);
