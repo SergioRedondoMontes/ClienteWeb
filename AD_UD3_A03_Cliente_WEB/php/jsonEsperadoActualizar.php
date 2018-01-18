@@ -5,7 +5,7 @@
 $arrEsperado = array();
 $arrAlumnoEsperado = array();
 
-$arrEsperado["peticion"] = "add";
+$arrEsperado["peticion"] = "upd";
 
 $arrAlumnoEsperado["dni"] = "45615427B (String)";
 $arrAlumnoEsperado["nombre"] = "Paco (String)";
@@ -33,7 +33,7 @@ function JSONCorrectoAnnadir($recibido){
 
 	$auxCorrecto = false;
 
-	if(isset($recibido["peticion"]) && $recibido["peticion"] ="add" && isset($recibido["alumnoUpd"])){
+	if(isset($recibido["peticion"]) && $recibido["peticion"] ="upd" && isset($recibido["alumnoUpd"])){
 
 		$auxAlumno = $recibido["alumnoUpd"];
 		if(isset($auxAlumno["dni"]) && isset($auxAlumno["nombre"]) && 

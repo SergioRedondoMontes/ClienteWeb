@@ -1,5 +1,11 @@
 var myArr;
 var myArrTitu;
+var dniUpd;
+var nombreUpd;
+var apellidoUpd;
+var nacionalidadUpd;
+var telefonoUpd;
+var titulacionUpd;
 console.log("INICIO CARGA");
 
 function loadDoc() {
@@ -96,7 +102,7 @@ function loadDocTitulaciones() {
     xhttp.send();
 }
 
-function myFunctionTitu(arr) {
+function myFunctionTitu(arrTitu) {
     var form = document.getElementById("FormUpd");
     var button = document.getElementById("button");
     var selectTitu = document.createElement("select");
@@ -105,10 +111,10 @@ function myFunctionTitu(arr) {
     form.insertBefore(selectTitu,button);
 
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arrTitu.length; i++) {
         var optionTitulo = document.createElement("option");
-        optionTitulo.setAttribute("value", arr[i].cod);
-        var texto = document.createTextNode(arr[i].nombre);
+        optionTitulo.setAttribute("value", arrTitu[i].cod);
+        var texto = document.createTextNode(arrTitu[i].nombre);
 		selectTitu.appendChild(optionTitulo);
         optionTitulo.appendChild(texto);
     }
@@ -121,38 +127,94 @@ function selector(idTrSeleccionado) {
     var apellido;
     var nacionalidad;
     var telefono;
-    var titulacion;
+    var titulacionId;
+    //alert(idTrSeleccionado);
+    var arrFila = document.getElementById(idTrSeleccionado);
+   //alert(document.getElementById(idTrSeleccionado).childNodes[0].innerHTML);
+   dni =  arrFila.childNodes[0].innerHTML;
+
+   nombre =  arrFila.childNodes[1].innerHTML;
+
+   apellido =  arrFila.childNodes[2].innerHTML;
+
+   telefono =  arrFila.childNodes[3].innerHTML;
+
+   nacionalidad =  arrFila.childNodes[4].innerHTML;
+
+   titulacionId =  arrFila.childNodes[5].getAttribute("id").substring(4);
+
+   setAlumnoFormUpd(dni,nombre,apellido,nacionalidad,telefono,titulacionId);
 }
 
-/*
-function borrarAlumno(alumnoID) {
+function setAlumnoFormUpd(dni,nombre,apellido,nacionalidad,telefono,titulacionId) {
+    
+    document.getElementById("dni").value = dni;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("nacionalidad").value = nacionalidad;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("titulacion").value = titulacionId;
+}
+
+
+function recogerAlumno() {
+    dniUpd = document.getElementById("dni").value;
+    nombreUpd = document.getElementById("nombre").value;
+    apellidoUpd = document.getElementById("apellido").value;
+    nacionalidadUpd = document.getElementById("nacionalidad").value;
+    telefonoUpd = document.getElementById("telefono").value;
+    titulacionUpd = document.getElementById("titulacion").value;
+
+    var alumno = JSON.stringify({"alumnoUpd":{"nombre": nombreUpd, "apellido":apellidoUpd,"dni":dniUpd,
+        "nacionalidad":nacionalidadUpd,"telefono":telefonoUpd,"titulacion":titulacionUpd},"peticion":"upd"});
+    insertAlumno(alumno);
+}
+
+function insertAlumno(alumnoJSON) {
+    alert(alumnoJSON);
     var resp;
-    alert(alumnoID);
-    var alumno = JSON.stringify({"alumnoDel":{"dni":alumnoID,},"peticion":"del"});
-    alert(alumno);
-    var url = "php/borrarAlumno.php";
+    var url = "php/actualizarAlumno.php";
 
 	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 	xmlhttp.open("POST", url);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
+    
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //alert(xmlhttp.responseText);
+            alert(xmlhttp.responseText);
             resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
             //myFunction(myArr.Titulaciones);
             //alert(resp);
             if(resp=="ok"){
-               borrarFila(alumnoID);
+               actualizarFila(dniUpd,nombreUpd,apellidoUpd,nacionalidadUpd,telefonoUpd,titulacionUpd);
             }
         }
     };
-    xmlhttp.send(alumno);
 
+    xmlhttp.send(alumnoJSON);
     
 }
 
-function borrarFila(alumnoID) {
-//alert(alumnoID);
-    document.getElementById(alumnoID).remove();
+
+function actualizarFila(dniUpd,nombreUpd,apellidoUpd,nacionalidadUpd,telefonoUpd,titulacionUpd) {
+    
+    // var dniAux = alumnoJSON.alumnoUpd.dni;
+    // var nombreAux =alumnoJSON.alumnoUpd.nombre;
+    // var apellidoAux  = alumnoJSON.alumnoUpd[0].apellido;
+    // var nacionalidadAux = alumnoJSON.alumnoUpd[0].nacionalidad;
+    // var telefonoAux = alumnoJSON.alumnoUpd[0].telefono;
+    var titulacionAux;
+    var arr = myArrTitu.Titulaciones
+    for (let index = 0; index < arr.length; index++) {
+        if(arr[index].id==titulacionUpd){
+            titulacionAux = arr[index].nombre;
+        }
+    }
+    //alert(idTrSeleccionado);
+    var arrFila = document.getElementById(dniUpd);
+    arrFila.childNodes[1].innerHTML = nombreUpd;
+    arrFila.childNodes[2].innerHTML = apellidoUpd;
+    arrFila.childNodes[3].innerHTML = nacionalidadUpd;
+    arrFila.childNodes[4].innerHTML = telefonoUpd;
+    arrFila.childNodes[5].innerHTML = titulacionAux;
 }
-*/
