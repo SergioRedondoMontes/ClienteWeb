@@ -2,26 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="insertarAlumno.js"></script>
     <title>insertarAlumno</title>
 </head>
 <body id ="myBody" onload="loadDoc()">
-    <form id="myForm">
-            <input type="text" id="dni" placeholder="dni"/>
-            <input type="text" id="nombre" placeholder="nombre"/>
-            <input type="text" id="apellido" placeholder="apellido"/>
-            <input type="text" id="nacionalidad" placeholder="nacionalidad"/>
-            <input type="text" id="telefono" placeholder="telefono"/>
-        
-    <button type="button"onclick="recogerAlumno()" id="button" title="enviar">Insertar Alumno</button><br/>
+    <div class="container-contact100" style="background-image: url('images/bg-01.jpg');">
+     <div class="wrap-contact100">
+         
+         	
+    <form id="myForm" class="contact100-form validate-form">
+            <span class="contact100-form-title">
+					Insertar alumno
+            </span>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="DNI requirido">
+                <span class="label-input100">DNI *</span>
+                <input type="text" id="dni" placeholder="dni" class="input100"/>
+            </div>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Nombre requirido">
+                <span class="label-input100">Nombre *</span>
+                <input type="text" id="nombre" placeholder="Introduce tu nombre" class="input100"/>
+            </div>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Nombre requirido">
+                <span class="label-input100">Apellido *</span>
+                <input type="text" id="apellido" placeholder="Apellido" class="input100"/>
+            </div>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Nombre requirido">
+                <span class="label-input100">Nacionalidad *</span>
+                <input type="text" id="nacionalidad" placeholder="Nacionalidad" class="input100"/>
+            </div>    
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Nombre requirido" >
+                <span class="label-input100">Telefono *</span>
+            <input type="text" id="telefono" placeholder="Telefono" class="input100"/>
+            </div>
+        <div id="asdf"  class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Nombre requirido" >
+                 <span class="label-input100">Titulacion *</span>
+        </div>
+            <div class="container-contact100-form-btn">
+				<div class="wrap-contact100-form-btn">
+				    <div class="contact100-form-bgbtn"></div>
+                    <button type="button"onclick="recogerAlumno()" id="button" title="Enviar" class="contact100-form-btn">Insertar Alumno</button>
+                </div>
+               
+            </div>
     </form>
-    <div>
+    
+    
+    </div><br>
         <form id="formBack">
-            <input type="button" value="Volver atrás" onclick="history.back()" style="font-family: Verdana; font-size: 10 pt">
-        </form>
-    </div>
+         <div class="wrap-contact100-form-btn">
+				    <div class="contact100-form-bgbtn"></div>    
+        <button type="button" value="Volver atrás" onclick="history.back()" class="contact100-form-btn">Volver Atras </button>
+        </div>
+    </form>
+ </div>  
+    
 </body>
 
 </html>

@@ -16,16 +16,18 @@ function loadDoc() {
 }
 
 function myFunction(arr) {
-    var form = document.getElementById("myForm");
-    var button = document.getElementById("button");
+    var form = document.getElementById("asdf");
+    var divTitulacion = document.getElementById("asdf");
     var selectTitu = document.createElement("select");
     selectTitu.setAttribute("id","titulacion");
-    //form.appendChild(selectTitu);
-    form.insertBefore(selectTitu,button);
+    form.appendChild(selectTitu);
+    
+
 
 
     for (let i = 0; i < arr.length; i++) {
         var optionTitulo = document.createElement("option");
+        optionTitulo.classList.add("input100");
         optionTitulo.setAttribute("value", arr[i].cod);
         var texto = document.createTextNode(arr[i].nombre);
 		selectTitu.appendChild(optionTitulo);
