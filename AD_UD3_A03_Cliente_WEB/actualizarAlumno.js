@@ -103,12 +103,12 @@ function loadDocTitulaciones() {
 }
 
 function myFunctionTitu(arrTitu) {
-    var form = document.getElementById("FormUpd");
-    var button = document.getElementById("button");
+    var form = document.getElementById("asdf");
+    var divTitulacion = document.getElementById("asdf");
     var selectTitu = document.createElement("select");
     selectTitu.setAttribute("id","titulacion");
-    //form.appendChild(selectTitu);
-    form.insertBefore(selectTitu,button);
+    selectTitu.setAttribute("class","input100");
+    form.appendChild(selectTitu);
 
 
     for (let i = 0; i < arrTitu.length; i++) {

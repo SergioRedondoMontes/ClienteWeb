@@ -20,6 +20,7 @@ function myFunction(arr) {
     var divTitulacion = document.getElementById("asdf");
     var selectTitu = document.createElement("select");
     selectTitu.setAttribute("id","titulacion");
+    selectTitu.setAttribute("class","input100");
     form.appendChild(selectTitu);
     
 
@@ -27,7 +28,8 @@ function myFunction(arr) {
 
     for (let i = 0; i < arr.length; i++) {
         var optionTitulo = document.createElement("option");
-        optionTitulo.classList.add("input100");
+        //optionTitulo.setAttribute("class","input100");
+        selectTitu.setAttribute("class","input100");
         optionTitulo.setAttribute("value", arr[i].cod);
         var texto = document.createTextNode(arr[i].nombre);
 		selectTitu.appendChild(optionTitulo);
