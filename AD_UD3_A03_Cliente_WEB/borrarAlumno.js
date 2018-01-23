@@ -7,9 +7,18 @@ function loadDoc() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //alert(this.responseText);
-            myArr = JSON.parse(this.responseText);
+            try {
+                myArr = JSON.parse(this.responseText);
+                var estado = JSON.parse(this.responseText).estado;
+            } catch (error) {
+                alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+            }
+            if(estado=="ok"){
+                myFunction(myArr.Alumnos);
+             }else{
+                 alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+             }
             
-            myFunction(myArr.Alumnos);
         }
     };
     xhttp.open("GET", url, true);
@@ -94,11 +103,19 @@ function borrarAlumno(alumnoID) {
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //alert(xmlhttp.responseText);
-            resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
+            try {
+                resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
+
+            } catch (error) {
+                //alert("No se puede borrar los datos, por favor pongase en contacto con el administrador");
+            }
             //myFunction(myArr.Titulaciones);
             //alert(resp);
             if(resp=="ok"){
                borrarFila(alumnoID);
+            }else{
+                alert("No se puede borrar los datos, por favor pongase en contacto con el administrador");
+
             }
         }
     };

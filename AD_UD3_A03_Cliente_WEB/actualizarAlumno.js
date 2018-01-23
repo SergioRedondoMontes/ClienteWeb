@@ -14,9 +14,19 @@ function loadDoc() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //alert(this.responseText);
-            myArr = JSON.parse(this.responseText);
+            try {
+                myArr = JSON.parse(this.responseText);
+                var estado = JSON.parse(this.responseText).estado;
+            } catch (error) {
+                
+            }
+            if(estado=="ok"){
+                myFunction(myArr.Alumnos);
+             }else{
+                 alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+             }
             
-            myFunction(myArr.Alumnos);
+            
         }
     };
     xhttp.open("GET", url, true);
@@ -93,9 +103,19 @@ function loadDocTitulaciones() {
     var url = "php/leerTitulaciones.php";
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            // alert(this.responseText);
-            myArrTitu = JSON.parse(this.responseText);
-            myFunctionTitu(myArrTitu.Titulaciones);
+             alert(this.responseText);
+            try {
+                myArrTitu = JSON.parse(this.responseText);
+                var estado = JSON.parse(this.responseText).estado;
+            } catch (error) {
+                
+            }
+                 
+            if(estado=="ok"){
+                myFunctionTitu(myArrTitu.Titulaciones);
+             }else{
+                 alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+             }
         }
     };
     xhttp.open("GET", url, true);
@@ -171,7 +191,7 @@ function recogerAlumno() {
 }
 
 function insertAlumno(alumnoJSON) {
-    alert(alumnoJSON);
+    //alert(alumnoJSON);
     var resp;
     var url = "php/actualizarAlumno.php";
 
@@ -181,12 +201,19 @@ function insertAlumno(alumnoJSON) {
     
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert(xmlhttp.responseText);
-            resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
+            //alert(xmlhttp.responseText);
+            try {
+                resp = JSON.parse(xmlhttp.responseText).estado;//guardo directarmente el estado del delete
+
+            } catch (error) {
+                
+            }
             //myFunction(myArr.Titulaciones);
             //alert(resp);
             if(resp=="ok"){
                actualizarFila(dniUpd,nombreUpd,apellidoUpd,nacionalidadUpd,telefonoUpd,titulacionUpd);
+            }else{
+                alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
             }
         }
     };
@@ -205,16 +232,21 @@ function actualizarFila(dniUpd,nombreUpd,apellidoUpd,nacionalidadUpd,telefonoUpd
     // var telefonoAux = alumnoJSON.alumnoUpd[0].telefono;
     var titulacionAux;
     var arr = myArrTitu.Titulaciones
+    //alert(myArrTitu);
+    
     for (let index = 0; index < arr.length; index++) {
-        if(arr[index].id==titulacionUpd){
+        //alert(arr[index]);
+        if(arr[index].cod==titulacionUpd){
+            alert("index:" + arr[index].nombre + " titu: "+ titulacionUpd);
             titulacionAux = arr[index].nombre;
         }
     }
+    
     //alert(idTrSeleccionado);
     var arrFila = document.getElementById(dniUpd);
     arrFila.childNodes[1].innerHTML = nombreUpd;
     arrFila.childNodes[2].innerHTML = apellidoUpd;
-    arrFila.childNodes[3].innerHTML = nacionalidadUpd;
-    arrFila.childNodes[4].innerHTML = telefonoUpd;
+    arrFila.childNodes[3].innerHTML = telefonoUpd;
+    arrFila.childNodes[4].innerHTML = nacionalidadUpd;
     arrFila.childNodes[5].innerHTML = titulacionAux;
 }

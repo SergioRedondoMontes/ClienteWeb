@@ -7,8 +7,18 @@ function loadDoc() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // alert(this.responseText);
-            myArr = JSON.parse(this.responseText);
-            myFunction(myArr.Titulaciones);
+            try {
+                var estado = JSON.parse(this.responseText).estado;
+                myArr = JSON.parse(this.responseText);
+            } catch (error) {
+                
+            }
+            if(estado=="ok"){
+                myFunction(myArr.Titulaciones);
+             }else{
+                 alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+             }
+            
         }
     };
     xhttp.open("GET", url, true);
@@ -38,7 +48,8 @@ function myFunction(arr) {
 }
 
 function recogerAlumno() {
-    var nombre = document.getElementById("nombre").value;
+    try {
+        var nombre = document.getElementById("nombre").value;
     var apellido = document.getElementById("apellido").value;
     var dni = document.getElementById("dni").value;
     var nacionalidad = document.getElementById("nacionalidad").value;
@@ -48,6 +59,11 @@ function recogerAlumno() {
     var alumno = JSON.stringify({"alumnoAdd":{"nombre": nombre, "apellido":apellido,"dni":dni,
         "nacionalidad":nacionalidad,"telefono":telefono,"titulacion":titulacion},"peticion":"add"});
         insertAlumno(alumno);
+    } catch (error) {
+        alert("No se puede insertar los datos, por favor pongase en contacto con el administrador");
+
+    }
+    
 }
 
 function insertAlumno(alumnoJSON) {
@@ -62,6 +78,18 @@ function insertAlumno(alumnoJSON) {
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //alert(xmlhttp.responseText);
+            try {
+                var estado = JSON.parse(this.responseText).estado;
+            } catch (error) {
+                
+            }
+            if(estado=="ok"){
+                
+             }else{
+                 alert("No se puede insertar los datos, por favor pongase en contacto con el administrador");
+             }
+        }else{
+            alert("No se puede insertar los datos, por favor pongase en contacto con el administrador");
         }
     };
 

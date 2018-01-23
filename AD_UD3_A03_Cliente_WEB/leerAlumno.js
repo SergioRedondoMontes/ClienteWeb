@@ -1,4 +1,5 @@
 var myArr;
+var estado = "false";
 console.log("INICIO CARGA");
 
 function loadDoc() {
@@ -7,9 +8,18 @@ function loadDoc() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //alert(this.responseText);
-            myArr = JSON.parse(this.responseText);
+            try {
+                myArr = JSON.parse(this.responseText);
+                estado = JSON.parse(this.responseText).estado;
+            } catch (error) {
+                //alert(error);
+            }
             
-            myFunction(myArr.Alumnos);
+            if(estado=="ok"){
+                myFunction(myArr.Alumnos);
+            }else{
+                alert("No se puede mostar los datos, por favor pongase en contacto con el administrador");
+            }
         }
     };
     xhttp.open("GET", url, true);
